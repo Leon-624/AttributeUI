@@ -252,6 +252,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                     {
                         xtype: 'component',
                         reference: 'jsonPanelCmpt',
+                        id: 'jsonPanelCmpt',
                         scrollable: true,
                         padding: '10 10 10 15',
                         border: '0 0 0 2',
@@ -259,7 +260,10 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                             borderColor: '#66ccff',
                             borderStyle: 'solid'
                         },
-                        html: '<h3>Use "Show Json" button to display JSON of current attribute.</h3>'
+                        html: '<h3>Use "Show JSON" button to display JSON of current attribute.</h3>',
+                        listeners: {
+                            refresh: 'onJsonPanelCmptRefresh'
+                        }
                     }
                 ]
             }

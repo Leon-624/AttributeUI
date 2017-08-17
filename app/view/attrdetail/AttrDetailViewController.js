@@ -69,6 +69,10 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
 
     onResetButtonClick: function(){
         this.attrDetailForm.reset(true);
+    },
+
+    onJsonPanelCmptRefresh: function(){
+        this.onshowJsonButtonClick();
     }
     
 });
