@@ -52,7 +52,8 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 
 		var rowIndex = button.up('gridview').indexOf(button.el.up('table')),
 			record = this.attrlistStore.getAt(rowIndex);
-		record.set('config', JSON.stringify(record.get('config')));
+		if(typeof record.get('config') !== 'string')	//only stringify once
+			record.set('config', JSON.stringify(record.get('config')));
 
 		button.up('viewporttab').setActiveTab(1);
 		var attrdetailPage = (Ext.ComponentQuery.query('attrdetail'))[0];
