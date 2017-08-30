@@ -56,7 +56,9 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 
 		button.up('viewporttab').setActiveTab(1);
 		var attrdetailPage = (Ext.ComponentQuery.query('attrdetail'))[0];
-		attrdetailPage.down('form').loadRecord(record);
+		var detailPageForm = attrdetailPage.down('form');
+		detailPageForm.reset(true);	//unbind record set by loadRecord
+		detailPageForm.loadRecord(record);
 		(Ext.ComponentQuery.query('#jsonPanelCmpt'))[0].fireEvent('refresh');
 	},
 
