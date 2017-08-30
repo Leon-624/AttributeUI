@@ -46,7 +46,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
 
         var me = this;
         Ext.Ajax.request({
-            url: global.postUrl,
+            url: global.urlPost,
             method: 'POST',
             proxy:{
                 reader: {

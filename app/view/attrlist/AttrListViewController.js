@@ -15,7 +15,8 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 
 	loadAttrListStore: function(version){
 		var proxy = this.attrlistStore.getProxy();
-		proxy.getApi().read = "http://localhost:8080/mock-attr-service/rest/definitions/retrieve";
+		proxy.getApi().read = global.urlGet;
+		console.log(global.urlGet);
 
 		var me = this;
 		this.attrlistStore.load({

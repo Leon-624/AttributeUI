@@ -155,6 +155,75 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 allowBlank: true
                             },
                             {
+                                xtype: 'combobox',
+                                reference: 'isDependentField',
+                                name: 'isDependent',
+                                fieldLabel: 'Is Dependent',
+                                multiSelect: false,
+                                queryMode: 'local',
+                                store: {
+                                    data: [
+                                        {
+                                            valueField: false,
+                                            displayField: 'False'
+                                        },
+                                        {
+                                            valueField: true,
+                                            displayField: 'True'
+                                        }
+                                    ]
+                                },
+                                displayField: 'displayField',
+                                valueField: 'valueField',
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'combobox',
+                                reference: 'isQuoteAttributeField',
+                                name: 'isQuoteAttribute',
+                                fieldLabel: 'Is Quote Attribute',
+                                multiSelect: false,
+                                queryMode: 'local',
+                                store: {
+                                    data: [
+                                        {
+                                            valueField: false,
+                                            displayField: 'False'
+                                        },
+                                        {
+                                            valueField: true,
+                                            displayField: 'True'
+                                        }
+                                    ]
+                                },
+                                displayField: 'displayField',
+                                valueField: 'valueField',
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'combobox',
+                                reference: 'checkroleforinitiallyhiddenField',
+                                name: 'checkroleforinitiallyhidden',
+                                fieldLabel: 'Check Role for Initially Hidden',
+                                multiSelect: false,
+                                queryMode: 'local',
+                                store: {
+                                    data: [
+                                        {
+                                            valueField: false,
+                                            displayField: 'False'
+                                        },
+                                        {
+                                            valueField: true,
+                                            displayField: 'True'
+                                        }
+                                    ]
+                                },
+                                displayField: 'displayField',
+                                valueField: 'valueField',
+                                allowBlank: true
+                            },
+                            {
                                 xtype: 'tagfield',
                                 reference: 'rolesTagField',
                                 name: 'roles',
@@ -176,6 +245,14 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                             displayField: 'ROLE_TDE'
                                         },
                                         {
+                                            valueField: "vsc",
+                                            displayField: 'ROLE_VSC'
+                                        },
+                                        {
+                                            valueField: "prov",
+                                            displayField: 'ROLE_PROV'
+                                        },
+                                        {
                                             valueField: "np&i",
                                             displayField: 'ROLE_NPI'
                                         },
@@ -187,7 +264,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 },
                                 displayField: 'displayField',
                                 valueField: 'valueField',
-                                allowBlank: true
+                                allowBlank: false
                             },
                             {
                                 xtype: 'textareafield',
@@ -205,6 +282,20 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 name: 'config',
                                 grow: true,
                                 sortable: false,
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'textfield',
+                                reference: 'createdByTextField',
+                                fieldLabel: 'Create By',
+                                name: 'createdBy',
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'textfield',
+                                reference: 'modifiedByTextField',
+                                fieldLabel: 'Modified By',
+                                name: 'modifiedBy',
                                 allowBlank: true
                             },
                             {

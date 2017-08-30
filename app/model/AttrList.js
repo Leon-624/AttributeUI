@@ -8,9 +8,14 @@ Ext.define('AttributeUI.model.AttrList', {
 		{name: 'xtype', type: 'string'},
 		{name: 'required', type: 'boolean'},
 		{name: 'hidden', type: 'boolean'},
+		{name: 'isDependent', type: 'boolean'},
+		{name: 'isQuoteAttribute', type: 'boolean'},
+		{name: 'checkroleforinitiallyhidden', type: 'boolean'},
 		'roles',
 		{name: 'items', type: 'string'},
 		'config',
+		{name: 'createdBy', type: 'string'},
+		{name: 'modifiedBy', type: 'string'},
 		{name: 'version', type: 'int'}
 	],
 	idProperty: 'setFieldDefinitions_PK'
