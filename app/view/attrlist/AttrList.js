@@ -93,12 +93,20 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 				flex: 1
 			},
 			{
+				text: 'Roles',
+				dataIndex: 'roles',
+				sortable: true,
+				hideable: true,
+				draggable: true,
+				flex: 1
+			},
+			{
 				text: 'Version',
 				dataIndex: 'version',
 				sortable: true,
 				hideable: true,
 				draggable: true,
-				flex: 1
+				flex: 0.5
 			},
 			{
 				text: 'Action',
