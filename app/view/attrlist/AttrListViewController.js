@@ -27,7 +27,7 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 				}
 				else
 				{
-					global.toast("Something is wrong...");
+					global.toast("Load: something is wrong...");
 				}
 			}
 		});
@@ -39,6 +39,14 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 			method: 'GET',
 			callback: function(options, success, response){
 				console.log(response);
+				if(response.responseText === 'true')
+				{
+					global.toast("Reload response: succeeded");
+				}
+				else
+				{
+					global.toast("Reload: something is wrong...");
+				}
 			}
 		});
 		global.toast("Reload signal sent... Waiting for response");

@@ -64,38 +64,35 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
                 Ext.Msg.show({
                     title:'Server Response',
                     message: response.responseText
-        });
+                });
             }
         });
     },
 
     onDeleteButtonClick: function(){
         var me = this;
-        var deleteUrl = global.urlDelete;
+        var deleteUrl = global.urlDelete + "?attrname=" + me.nameTextField.getValue()
+         + "&version=" + me.versionNumberfield.getValue();
         Ext.Ajax.request({
-            url: deleteUrl
+            url: deleteUrl,
             method: 'DELETE',
-            params: {
-                attrname: me.nameTextField.getValue(),
-                version: me.versionNumberfield.getValue()
-            },
             proxy:{
                 reader: {
                     type: 'json'
                 }
             },
             callback: function(options, success, response){
-                console.log(response.responseText);
-                /*Ext.Msg.show({
+                Ext.Msg.show({
                     title:'Server Response',
-                    message: response.responseText*/
-        });
+                    message: response.responseText
+                });
             }
         });
     },
 
     onResetButtonClick: function(){
         this.attrDetailForm.reset(true);
+        this.onshowJsonButtonClick();
     },
 
     onJsonPanelCmptRefresh: function(){
