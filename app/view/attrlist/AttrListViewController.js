@@ -15,8 +15,7 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 
 	loadAttrListStore: function(version){
 		var proxy = this.attrlistStore.getProxy();
-		proxy.getApi().read = global.urlGet;
-		console.log(global.urlGet);
+		proxy.getApi().read = global.urlGet + "?version=" + version;
 
 		var me = this;
 		this.attrlistStore.load({
@@ -32,6 +31,17 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 				}
 			}
 		});
+	},
+
+	onReloadAttrlistButtonClick: function(){
+		Ext.Ajax.request({
+			url: global.urlReload,
+			method: 'GET',
+			callback: function(options, success, response){
+				console.log(response);
+			}
+		});
+		global.toast("Reload signal sent... Waiting for response");
 	},
 
 	onFilterFieldChange: function(field, newValue, oldValue){

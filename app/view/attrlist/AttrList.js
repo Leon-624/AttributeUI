@@ -37,10 +37,22 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 						xtype: 'tbfill'
 					},
 					{
+						xtype: 'button',
+						text: 'Reload',
+						width: 90,
+                        reference: 'reloadAttrlistButton',
+                        handler: 'onReloadAttrlistButtonClick'
+					},
+					{
+						xtype: 'tbspacer',
+						width: 20
+					},
+					{
 						xtype: 'combobox',
 						reference: 'versionSel',
 						fieldLabel: 'Version',
-						labelWidth: 80,
+						labelWidth: 50,
+						width: 130,
 						forceSelection: false,
 						store: {
 							data: [
@@ -60,7 +72,8 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 					},
 					{
 						xtype: 'button',
-						text: 'Load/Refresh',
+						text: 'Load',
+						width: 90,
                         reference: 'loadAttrlistButton',
                         handler: 'onLoadAttrlistButtonClick'
 					}

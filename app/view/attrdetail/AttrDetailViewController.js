@@ -6,6 +6,8 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
     onAfterRender: function(){
         this.attrDetailForm = this.lookupReference('attrDetailForm');
         this.jsonPanelCmpt = this.lookupReference('jsonPanelCmpt');
+        this.nameTextField = this.lookupReference('nameTextField');
+        this.versionNumberfield = this.lookupReference('versionNumberfield');
     },
 
     onResize: function(){
@@ -62,6 +64,31 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
                 Ext.Msg.show({
                     title:'Server Response',
                     message: response.responseText
+        });
+            }
+        });
+    },
+
+    onDeleteButtonClick: function(){
+        var me = this;
+        var deleteUrl = global.urlDelete;
+        Ext.Ajax.request({
+            url: deleteUrl
+            method: 'DELETE',
+            params: {
+                attrname: me.nameTextField.getValue(),
+                version: me.versionNumberfield.getValue()
+            },
+            proxy:{
+                reader: {
+                    type: 'json'
+                }
+            },
+            callback: function(options, success, response){
+                console.log(response.responseText);
+                /*Ext.Msg.show({
+                    title:'Server Response',
+                    message: response.responseText*/
         });
             }
         });

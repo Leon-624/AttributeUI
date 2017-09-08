@@ -4,10 +4,15 @@
  * initialization details.
  */
 
-//Url to POST and GET
 var global = {};
-global.urlPost = "http://hehe";
-global.urlGet = "http://hehe";
+global.urlPrefix = "http://localhost:8080/";
+
+//Url to POST and GET
+global.urlPost = global.urlPrefix + "Set/dv/listitem";
+global.urlGet = global.urlPrefix + "Set/dv/definitions";
+global.urlReload = global.urlPrefix + "Set/dv/reload";
+global.urlDelete = global.urlPrefix + "Set/dv/listitem";
+
 
 Ext.define('AttributeUI.Application', {
     extend: 'Ext.app.Application',

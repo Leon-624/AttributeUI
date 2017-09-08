@@ -317,6 +317,12 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 handler: 'onResetButtonClick'
                             },
                             {
+                                text: 'Delete',
+                                reference: 'deleteButton',
+                                formBind: false,
+                                handler: 'onDeleteButtonClick'
+                            },
+                            {
                                 text: 'Show JSON',
                                 reference: 'showJsonButton',
                                 formBind: false,
