@@ -21,6 +21,7 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 					{
 						xtype: 'combobox',
 						reference: 'filterField',
+						width: 350,
 						name: 'filterField',
 						fieldLabel: 'Name Filter',
 						multiSelect: false,
@@ -29,6 +30,13 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 						displayField: 'name',
 						valueField: 'name',
 						allowBlank: true,
+						triggers: {
+							filterClear: {
+								cls: 'x-fa fa-close',
+								weight: -1,
+								handler: 'onFilterClearClick'
+							}
+						},
 						listeners: {
 							change: 'onFilterFieldChange'
 						}
@@ -38,8 +46,8 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 					},
 					{
 						xtype: 'button',
-						text: 'Reload',
-						width: 90,
+						text: 'Send Reload Signal',
+						width: 140,
                         reference: 'reloadAttrlistButton',
                         handler: 'onReloadAttrlistButtonClick'
 					},
@@ -68,7 +76,7 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 						},
 						displayField: 'displayField',
 						valueField: 'valueField',
-						value: 2
+						value: 1
 					},
 					{
 						xtype: 'button',

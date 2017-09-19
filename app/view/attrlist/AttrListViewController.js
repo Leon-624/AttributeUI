@@ -6,6 +6,7 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 	onAfterRender: function(gridPanel){
 		this.attrlistStore = this.getViewModel().getStore('attrlist');
 		this.versionSel = this.lookupReference('versionSel');
+		this.filterField = this.lookupReference('filterField');
 	},
 
 	onLoadAttrlistButtonClick: function(){
@@ -65,6 +66,10 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 		}
 	},
 
+	onFilterClearClick: function(){
+		this.filterField.setValue('');
+	},
+
 	onActionButtonClick: function(button, event){
 		button.setStyle('backgroundColor', '#ff9900');
 
@@ -77,6 +82,8 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 		var attrdetailPage = (Ext.ComponentQuery.query('attrdetail'))[0];
 		var detailPageForm = attrdetailPage.down('form');
 		detailPageForm.reset(true);	//unbind record set by loadRecord
+		//Refresh ItemsEdit first to clean ItemsEdit; then ItemsEdit will be refreshed again based on items from server
+		(Ext.ComponentQuery.query('#itemsEditFieldContainer'))[0].fireEvent('refresh', {});
 		detailPageForm.loadRecord(record);
 		(Ext.ComponentQuery.query('#jsonPanelCmpt'))[0].fireEvent('refresh');
 	},

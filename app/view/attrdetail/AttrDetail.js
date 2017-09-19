@@ -268,23 +268,79 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                             },
                             {
                                 xtype: 'textareafield',
-                                reference: 'itemsTextField',
-                                fieldLabel: 'Items',
-                                name: 'items',
+                                reference: 'configTextField',
+                                fieldLabel: 'Config (JSON)',
+                                name: 'config',
                                 grow: true,
-                                sortable: false,
                                 allowBlank: true
                             },
                             {
                                 xtype: 'textareafield',
-                                reference: 'configTextField',
-                                fieldLabel: 'Config',
-                                name: 'config',
+                                reference: 'itemsTextField',
+                                fieldLabel: 'Items (server response, non-editable)',
+                                name: 'items',
                                 grow: true,
-                                sortable: false,
-                                allowBlank: true
+                                allowBlank: true,
+                                editable: false,
+                                listeners: {
+                                    change: 'onItemsChange'
+                                }
                             },
                             {
+                                xtype: 'fieldcontainer',
+                                reference: 'itemsEditFieldContainer',
+                                id: 'itemsEditFieldContainer',
+                                fieldLabel: 'Items Edit (parsed from server response)',
+                                name: 'itemsedit',
+                                items: [
+                                    {
+                                        xtype: 'textfield',
+                                        fieldLabel: 'Default Value',
+                                        reference: 'defaultValueTextfield',
+                                        allowBlank: true
+                                    },
+                                    {
+                                        xtype: 'fieldcontainer',
+                                        layout: 'hbox',
+                                        items: [
+                                            {
+                                                xtype: 'textfield',
+                                                fieldLabel: 'Name',
+                                                labelWidth: 50,
+                                                allowBlank: true
+                                            },
+                                            {
+                                                xtype: 'splitter',
+                                                width: 30
+                                            },
+                                            {
+                                                xtype: 'textfield',
+                                                fieldLabel: 'Label',
+                                                labelWidth: 50,
+                                                allowBlank: true
+                                            },
+                                            {
+                                                xtype: 'tbspacer',
+                                                width: 30
+                                            },
+                                            {
+                                                xtype: 'button',
+                                                text: 'Copy Name->Label',
+                                                handler: 'onNameToLabelClick'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        text: 'Add Name-Label Pair',
+                                        handler: 'onAddPairButtonClick'
+                                    }
+                                ],
+                                listeners: {
+                                    refresh: 'onItemsEditRefresh'
+                                }
+                            },
+                            /*{
                                 xtype: 'textfield',
                                 reference: 'createdByTextField',
                                 fieldLabel: 'Create By',
@@ -297,7 +353,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 fieldLabel: 'Modified By',
                                 name: 'modifiedBy',
                                 allowBlank: true
-                            },
+                            },*/
                             {
                                 xtype: 'numberfield',
                                 reference: 'versionNumberfield',
@@ -329,7 +385,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 handler: 'onshowJsonButtonClick'
                             },
                             {
-                                text: 'Upsert',
+                                text: 'Save',
                                 reference: 'upsertButton',
                                 formBind: true,
                                 handler: 'onUpsertButtonClick'
@@ -371,7 +427,8 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
 
     listeners: {
     	afterrender: 'onAfterRender',
-        resize: 'onResize'
+        resize: 'onResize',
+
     }
 
 });

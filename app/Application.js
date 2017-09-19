@@ -5,7 +5,8 @@
  */
 
 var global = {};
-global.urlPrefix = "http://localhost:8080/";
+//global.urlPrefix = "../../";
+global.urlPrefix = "../Application/v1/";
 
 //Url to POST and GET
 global.urlPost = global.urlPrefix + "Set/dv/listitem";
