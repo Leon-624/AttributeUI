@@ -21,6 +21,7 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 					{
 						xtype: 'combobox',
 						reference: 'filterField',
+						id: 'filterField',
 						width: 350,
 						name: 'filterField',
 						fieldLabel: 'Name Filter',
@@ -46,7 +47,7 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 					},
 					{
 						xtype: 'button',
-						text: 'Send Reload Signal',
+						text: 'Reload Attributes',
 						width: 140,
                         reference: 'reloadAttrlistButton',
                         handler: 'onReloadAttrlistButtonClick'
@@ -58,9 +59,9 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 					{
 						xtype: 'combobox',
 						reference: 'versionSel',
-						fieldLabel: 'Version',
-						labelWidth: 50,
-						width: 130,
+						fieldLabel: 'Select Version',
+						labelWidth: 100,
+						width: 180,
 						forceSelection: false,
 						store: {
 							data: [
@@ -76,14 +77,21 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 						},
 						displayField: 'displayField',
 						valueField: 'valueField',
-						value: 1
+						value: 1,
+						listeners: {
+							change: 'onVersionChange'
+						}
+					},
+					{
+						xtype: 'tbspacer',
+						width: 20
 					},
 					{
 						xtype: 'button',
-						text: 'Load',
-						width: 90,
-                        reference: 'loadAttrlistButton',
-                        handler: 'onLoadAttrlistButtonClick'
+						text: 'Add New',
+						width: 100,
+                        reference: 'addNewAttrButton',
+                        handler: 'onAddNewAttrButtonClick'
 					}
 				]
 			}
@@ -139,7 +147,7 @@ Ext.define('AttributeUI.view.attrlist.AttrList', {
 				flex: 1,
 				widget: {
 					xtype: 'button',
-					text: 'Details',
+					text: 'Edit',
 					style: 'background-color:#29a329',
 					listeners: {
 						mouseover: 'onActionButtonMouseOver',

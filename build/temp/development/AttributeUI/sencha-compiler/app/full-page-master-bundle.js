@@ -1,2 +1,2 @@
 // @tag full-page
-// @require /Users/liyanxu/Downloads/apache-tomcat-8.5.12/webapps/AttributeUI/app.js
+// @require C:\Users\xu.liyan\Desktop\apache-tomcat-8.5.20-windows-x64\apache-tomcat-8.5.20\webapps\Utility\AttributeUI\app.js

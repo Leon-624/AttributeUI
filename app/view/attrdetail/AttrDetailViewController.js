@@ -9,15 +9,50 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
 
     onAfterRender: function(){
         this.attrDetailForm = this.lookupReference('attrDetailForm');
+        this.nameTextField = this.lookupReference('nameTextField');
         this.itemsEditFieldContainer = this.lookupReference('itemsEditFieldContainer');
+        this.itemsTextField = this.lookupReference('itemsTextField');
+        this.upsertButton = this.lookupReference('upsertButton');
         this.defaultValueTextfield = this.lookupReference('defaultValueTextfield');
         this.jsonPanelCmpt = this.lookupReference('jsonPanelCmpt');
         this.nameTextField = this.lookupReference('nameTextField');
         this.versionNumberfield = this.lookupReference('versionNumberfield');
+
+        this.mode = 1;  //1: create; 2: update
+        this.attrListStore = Ext.getStore('attrlist');
+
+        this.filterField = Ext.getCmp('filterField');
     },
 
     onResize: function(){
         //console.log("resize");
+    },
+
+    //if record is null, go to Create mode (through Reset or Add New button)
+    //if record is not null, go to Update mode (through loading from list)
+    refreshFormPanel: function(record){
+        this.attrDetailForm.reset(true);
+        this.onItemsEditRefresh({});
+        if(record === null || record === undefined)
+        {
+            this.mode = 1;
+            this.nameTextField.setEditable(true);
+            this.versionNumberfield.setEditable(false);
+            this.versionNumberfield.setHideTrigger(true);
+            this.itemsTextField.hide();
+            this.upsertButton.setText('Create');
+        }
+        else
+        {
+            this.mode = 2;
+            this.nameTextField.setEditable(false);
+            this.versionNumberfield.setEditable(true);
+            this.versionNumberfield.setHideTrigger(false);
+            this.itemsTextField.show();
+            this.upsertButton.setText('Update');
+            this.attrDetailForm.loadRecord(record);
+        }
+        this.onshowJsonButtonClick();
     },
 
     onshowJsonButtonClick: function(){
@@ -76,6 +111,19 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
     onUpsertButtonClick: function(){
         var postObj = this.onshowJsonButtonClick();
 
+        //unfilter store first
+        this.filterField.setValue('');
+        //examine if exists upon creation
+        if(this.mode == 1)
+        {
+            var idx = this.attrListStore.find('name', postObj.name);
+            if(idx != -1)
+            {
+                Ext.Msg.alert('Cannot Create', 'Name already exists!');
+                return;
+            }
+        }
+
         var me = this;
         Ext.Ajax.request({
             url: global.urlPost,
@@ -90,16 +138,36 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
             },
             jsonData: postObj,
             callback: function(options, success, response){
-                console.log(response);
+                //console.log(response);
                 Ext.Msg.show({
                     title:'Server Response',
                     message: response.responseText
                 });
+                if(me.mode == 1)
+                    me.onResetButtonClick();
             }
         });
     },
 
     onDeleteButtonClick: function(){
+        var me = this;
+        Ext.Msg.show({
+            title: 'Alert',
+            message: 'Are you sure to delete this attribute?',
+            buttons: Ext.Msg.YESNO,
+            icon: Ext.Msg.QUESTION,
+            fn: function(btn){
+                if(btn === 'yes')
+                {
+                    var callback = $.proxy(me.onDeleteButtonClickCont, me);
+                    callback();
+                    me.onResetButtonClick();
+                }
+            }
+        });
+    },
+
+    onDeleteButtonClickCont: function(){
         var me = this;
         var deleteUrl = global.urlDelete + "?attrname=" + me.nameTextField.getValue()
          + "&version=" + me.versionNumberfield.getValue();
@@ -121,9 +189,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
     },
 
     onResetButtonClick: function(){
-        this.attrDetailForm.reset(true);
-        this.onItemsEditRefresh({});
-        this.onshowJsonButtonClick();
+        this.refreshFormPanel();
     },
 
     onJsonPanelCmptRefresh: function(){

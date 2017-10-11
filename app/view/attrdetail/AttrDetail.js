@@ -29,7 +29,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                         bodyPadding: 20,
                         scrollable: true,
                         items: [
-                            {
+                            /*{
                                 xtype: 'numberfield',
                                 reference: 'pkNumberfield',
                                 fieldLabel: 'Definitions_PK',
@@ -38,12 +38,13 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 hideTrigger: true,
                                 keyNavEnabled: false,
                                 mouseWheelEnabled: false
-                            },
+                            },*/
                             {
                                 xtype: 'textfield',
                                 reference: 'nameTextField',
                                 fieldLabel: 'Name',
                                 name: 'name',
+                                msgTarget: 'under',
                                 allowBlank: false
                             },
                             {
@@ -106,122 +107,8 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 },
                                 displayField: 'displayField',
                                 valueField: 'valueField',
+                                msgTarget: 'under',
                                 allowBlank: false
-                            },
-                            {
-                                xtype: 'combobox',
-                                reference: 'requiredField',
-                                name: 'required',
-                                fieldLabel: 'Required',
-                                multiSelect: false,
-                                queryMode: 'local',
-                                store: {
-                                    data: [
-                                        {
-                                            valueField: false,
-                                            displayField: 'False'
-                                        },
-                                        {
-                                            valueField: true,
-                                            displayField: 'True'
-                                        }
-                                    ]
-                                },
-                                displayField: 'displayField',
-                                valueField: 'valueField',
-                                allowBlank: true
-                            },
-                            {
-                                xtype: 'combobox',
-                                reference: 'hiddenField',
-                                name: 'hidden',
-                                fieldLabel: 'Hidden',
-                                multiSelect: false,
-                                queryMode: 'local',
-                                store: {
-                                    data: [
-                                        {
-                                            valueField: false,
-                                            displayField: 'False'
-                                        },
-                                        {
-                                            valueField: true,
-                                            displayField: 'True'
-                                        }
-                                    ]
-                                },
-                                displayField: 'displayField',
-                                valueField: 'valueField',
-                                allowBlank: true
-                            },
-                            {
-                                xtype: 'combobox',
-                                reference: 'isDependentField',
-                                name: 'isDependent',
-                                fieldLabel: 'Is Dependent',
-                                multiSelect: false,
-                                queryMode: 'local',
-                                store: {
-                                    data: [
-                                        {
-                                            valueField: false,
-                                            displayField: 'False'
-                                        },
-                                        {
-                                            valueField: true,
-                                            displayField: 'True'
-                                        }
-                                    ]
-                                },
-                                displayField: 'displayField',
-                                valueField: 'valueField',
-                                allowBlank: true
-                            },
-                            {
-                                xtype: 'combobox',
-                                reference: 'isQuoteAttributeField',
-                                name: 'isQuoteAttribute',
-                                fieldLabel: 'Is Quote Attribute',
-                                multiSelect: false,
-                                queryMode: 'local',
-                                store: {
-                                    data: [
-                                        {
-                                            valueField: false,
-                                            displayField: 'False'
-                                        },
-                                        {
-                                            valueField: true,
-                                            displayField: 'True'
-                                        }
-                                    ]
-                                },
-                                displayField: 'displayField',
-                                valueField: 'valueField',
-                                allowBlank: true
-                            },
-                            {
-                                xtype: 'combobox',
-                                reference: 'checkroleforinitiallyhiddenField',
-                                name: 'checkroleforinitiallyhidden',
-                                fieldLabel: 'Check Role for Initially Hidden',
-                                multiSelect: false,
-                                queryMode: 'local',
-                                store: {
-                                    data: [
-                                        {
-                                            valueField: false,
-                                            displayField: 'False'
-                                        },
-                                        {
-                                            valueField: true,
-                                            displayField: 'True'
-                                        }
-                                    ]
-                                },
-                                displayField: 'displayField',
-                                valueField: 'valueField',
-                                allowBlank: true
                             },
                             {
                                 xtype: 'tagfield',
@@ -264,7 +151,48 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 },
                                 displayField: 'displayField',
                                 valueField: 'valueField',
+                                msgTarget: 'under',
                                 allowBlank: false
+                            },
+                            {
+                                xtype: 'checkboxfield',
+                                reference: 'requiredField',
+                                name: 'required',
+                                fieldLabel: 'Required',
+                                inputValue: true,
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'checkboxfield',
+                                reference: 'hiddenField',
+                                name: 'hidden',
+                                fieldLabel: 'Hidden',
+                                inputValue: true,
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'checkboxfield',
+                                reference: 'isDependentField',
+                                name: 'isDependent',
+                                fieldLabel: 'Is Dependent',
+                                inputValue: true,
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'checkboxfield',
+                                reference: 'isQuoteAttributeField',
+                                name: 'isQuoteAttribute',
+                                fieldLabel: 'Is Quote Attribute',
+                                inputValue: true,
+                                allowBlank: true
+                            },
+                            {
+                                xtype: 'checkboxfield',
+                                reference: 'checkroleforinitiallyhiddenField',
+                                name: 'checkroleforinitiallyhidden',
+                                fieldLabel: 'Check Role for Initially Hidden',
+                                inputValue: true,
+                                allowBlank: true
                             },
                             {
                                 xtype: 'textareafield',
@@ -282,6 +210,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 grow: true,
                                 allowBlank: true,
                                 editable: false,
+                                hidden: true,
                                 listeners: {
                                     change: 'onItemsChange'
                                 }
@@ -290,7 +219,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 xtype: 'fieldcontainer',
                                 reference: 'itemsEditFieldContainer',
                                 id: 'itemsEditFieldContainer',
-                                fieldLabel: 'Items Edit (parsed from server response)',
+                                fieldLabel: 'Items Edit',
                                 name: 'itemsedit',
                                 items: [
                                     {
@@ -359,8 +288,12 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 reference: 'versionNumberfield',
                                 fieldLabel: 'Version',
                                 name: 'version',
+                                maxValue: 10,
+                                minValue: 1,
+                                value: 1,
+                                editable: false,
                                 allowBlank: true,
-                                hideTrigger: false,
+                                hideTrigger: true,
                                 keyNavEnabled: false,
                                 mouseWheelEnabled: false
                             }
@@ -385,7 +318,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
                                 handler: 'onshowJsonButtonClick'
                             },
                             {
-                                text: 'Save',
+                                text: 'Create',
                                 reference: 'upsertButton',
                                 formBind: true,
                                 handler: 'onUpsertButtonClick'
@@ -428,7 +361,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetail', {
     listeners: {
     	afterrender: 'onAfterRender',
         resize: 'onResize',
-
+        refresh: 'refreshFormPanel'
     }
 
 });

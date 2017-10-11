@@ -7,14 +7,18 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 		this.attrlistStore = this.getViewModel().getStore('attrlist');
 		this.versionSel = this.lookupReference('versionSel');
 		this.filterField = this.lookupReference('filterField');
+
+		this.currVer = this.versionSel.getValue();
+		this.loadAttrListStore();
 	},
 
-	onLoadAttrlistButtonClick: function(){
-		var version = this.versionSel.getValue();
-		this.loadAttrListStore(version);
+	onVersionChange: function(versionSel, newValue, oldValue){
+		this.currVer = newValue;
+		this.loadAttrListStore();
 	},
 
-	loadAttrListStore: function(version){
+	loadAttrListStore: function(){
+		var version = this.currVer;
 		var proxy = this.attrlistStore.getProxy();
 		proxy.getApi().read = global.urlGet + "?version=" + version;
 
@@ -24,7 +28,7 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 				if(success)
 				{
 					var recordCount = records.length;
-					global.toast(recordCount + " attributes loaded");
+					global.toast(recordCount + " attributes (v" + version + ") loaded");
 				}
 				else
 				{
@@ -35,14 +39,16 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 	},
 
 	onReloadAttrlistButtonClick: function(){
+		var me = this;
 		Ext.Ajax.request({
 			url: global.urlReload,
 			method: 'GET',
 			callback: function(options, success, response){
-				console.log(response);
+				//console.log(response);
 				if(response.responseText === 'true')
 				{
-					global.toast("Reload response: succeeded");
+					global.toast("Reload succeeded");
+					me.loadAttrListStore();
 				}
 				else
 				{
@@ -51,6 +57,12 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 			}
 		});
 		global.toast("Reload signal sent... Waiting for response");
+	},
+
+	onAddNewAttrButtonClick: function(button){
+		button.up('viewporttab').setActiveTab(1);
+		var attrdetailPage = (Ext.ComponentQuery.query('attrdetail'))[0];
+		attrdetailPage.fireEvent('refresh', null);
 	},
 
 	onFilterFieldChange: function(field, newValue, oldValue){
@@ -80,12 +92,7 @@ Ext.define("AttributeUI.view.attrlist.AttrListViewController", {
 
 		button.up('viewporttab').setActiveTab(1);
 		var attrdetailPage = (Ext.ComponentQuery.query('attrdetail'))[0];
-		var detailPageForm = attrdetailPage.down('form');
-		detailPageForm.reset(true);	//unbind record set by loadRecord
-		//Refresh ItemsEdit first to clean ItemsEdit; then ItemsEdit will be refreshed again based on items from server
-		(Ext.ComponentQuery.query('#itemsEditFieldContainer'))[0].fireEvent('refresh', {});
-		detailPageForm.loadRecord(record);
-		(Ext.ComponentQuery.query('#jsonPanelCmpt'))[0].fireEvent('refresh');
+		attrdetailPage.fireEvent('refresh', record);
 	},
 
 	onActionButtonMouseOver: function(button){
