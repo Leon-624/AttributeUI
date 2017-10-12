@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'AttributeUI' );
-$image-search-path: '/Users/liyanxu/Downloads/apache-tomcat-8.5.12/webapps/AttributeUI/build/production/AttributeUI/resources';
+$image-search-path: 'C:/Users/xu.liyan/Desktop/apache-tomcat-8.5.20-windows-x64/apache-tomcat-8.5.20/webapps/Utility/AttributeUI/build/production/AttributeUI/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-attributeui-application: dynamic(true);;
 $include-attributeui-model-attrlist: dynamic(true);;

@@ -24,6 +24,10 @@ Ext.define('AttributeUI.view.viewport.ViewportTab', {
 		{
 			xtype: 'attrdetail',
 			anchor: '100% 100%'
+		},
+		{
+			xtype: 'attrreport',
+			anchor: '100% 100%'
 		}
 		/*{
 			xtype: 'design',

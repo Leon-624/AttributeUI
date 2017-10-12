@@ -33,6 +33,7 @@ Ext.define('AttributeUI.view.attrdetail.AttrDetailViewController', {
     refreshFormPanel: function(record){
         this.attrDetailForm.reset(true);
         this.onItemsEditRefresh({});
+        //console.log(record);
         if(record === null || record === undefined)
         {
             this.mode = 1;

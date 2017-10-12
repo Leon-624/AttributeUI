@@ -8,6 +8,8 @@ $include-attributeui-view-attrdetail-attrdetailviewcontroller: dynamic(true);;
 $include-attributeui-view-attrlist-attrlist: dynamic(true);;
 $include-attributeui-view-attrlist-attrlistviewcontroller: dynamic(true);;
 $include-attributeui-view-attrlist-attrlistviewmodel: dynamic(true);;
+$include-attributeui-view-attrreport-attrreport: dynamic(true);;
+$include-attributeui-view-attrreport-attrreportviewcontroller: dynamic(true);;
 $include-attributeui-view-viewport-viewporttab: dynamic(true);;
 $include-attributeui-view-viewport-viewporttabviewcontroller: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;

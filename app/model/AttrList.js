@@ -14,8 +14,6 @@ Ext.define('AttributeUI.model.AttrList', {
 		{name: 'checkroleforinitiallyhidden', type: 'boolean'},
 		{name: 'items', type: 'string'},
 		'config',
-		{name: 'createdBy', type: 'string'},
-		{name: 'modifiedBy', type: 'string'},
 		{name: 'version', type: 'int'}
 	],
 	idProperty: 'setFieldDefinitions_PK'

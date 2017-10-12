@@ -45,7 +45,10 @@ Ext.define('AttributeUI.Application', {
         'AttributeUI.model.AttrList',
 
         'AttributeUI.view.attrdetail.AttrDetail',
-        'AttributeUI.view.attrdetail.AttrDetailViewController'
+        'AttributeUI.view.attrdetail.AttrDetailViewController',
+
+        'AttributeUI.view.attrreport.AttrReport',
+        'AttributeUI.view.attrreport.AttrReportViewController'
     ],
 
     preSetup: function(){
